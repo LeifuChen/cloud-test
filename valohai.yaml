@@ -28,12 +28,10 @@
     name: tensorflow-cnn-aws
     image: valohai/keras:2.0.0-tensorflow1.0.1-python3.6-cuda8.0-cudnn5-devel-ubuntu16.04
     command:
-      - pwd
-      - python --version
+      - pip install keras --upgrade 
+      - pip install tensorflow --upgrade 
       - python -c "import keras; print('keras version is %s' % keras.__version__);"
       - python -c "import tensorflow; print('tensorflow version is %s' % tensorflow.__version__);"
-      - pip install keras --upgrade 
-      - python -c "import keras; print('keras version is %s' % keras.__version__);"
       - python cnn-aws.py
 
 - step:
