@@ -1,15 +1,6 @@
 
-# coding: utf-8
-
-# In[1]:
-
-
 from keras.datasets import fashion_mnist
 (train_X,train_Y), (test_X,test_Y) = fashion_mnist.load_data()
-
-
-# In[2]:
-
 
 import numpy as np
 from keras.utils import to_categorical
@@ -19,18 +10,11 @@ get_ipython().magic('matplotlib inline')
 print('Training data shape : ', train_X.shape, train_Y.shape)
 print('Testing data shape : ', test_X.shape, test_Y.shape)
 
-
-# In[3]:
-
-
 # Find the unique numbers from the train labels
 classes = np.unique(train_Y)
 nClasses = len(classes)
 print('Total number of outputs : ', nClasses)
 print('Output classes : ', classes)
-
-
-# In[4]:
 
 
 plt.figure(figsize=[5,5])
@@ -46,24 +30,15 @@ plt.imshow(test_X[0,:,:], cmap='gray')
 plt.title("Ground Truth : {}".format(test_Y[0]))
 
 
-# In[5]:
-
-
 train_X = train_X.reshape(-1, 28,28, 1)
 test_X = test_X.reshape(-1, 28,28, 1)
 train_X.shape, test_X.shape
-
-
-# In[6]:
 
 
 train_X = train_X.astype('float32')
 test_X = test_X.astype('float32')
 train_X = train_X / 255.
 test_X = test_X / 255.
-
-
-# In[7]:
 
 
 # Change the labels from categorical to one-hot encoding
@@ -75,20 +50,11 @@ print('Original label:', train_Y[0])
 print('After conversion to one-hot:', train_Y_one_hot[0])
 
 
-# In[8]:
-
-
 from sklearn.model_selection import train_test_split
 train_X,valid_X,train_label,valid_label = train_test_split(train_X, train_Y_one_hot, test_size=0.2, random_state=13)
 
 
-# In[9]:
-
-
 train_X.shape,valid_X.shape,train_label.shape,valid_label.shape
-
-
-# In[10]:
 
 
 import keras
@@ -118,25 +84,13 @@ fashion_model.add(LeakyReLU(alpha=0.1))
 fashion_model.add(Dense(num_classes, activation='softmax'))
 
 
-# In[11]:
-
-
 fashion_model.compile(loss=keras.losses.categorical_crossentropy, optimizer=keras.optimizers.Adam(),metrics=['accuracy'])
-
-
-# In[12]:
 
 
 fashion_model.summary()
 
 
-# In[13]:
-
-
 fashion_train = fashion_model.fit(train_X, train_label, batch_size=batch_size,epochs=epochs,verbose=1,validation_data=(valid_X, valid_label))
-
-
-# In[ ]:
 
 
 test_eval = fashion_model.evaluate(test_X, test_Y_one_hot, verbose=0)
