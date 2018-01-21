@@ -5,7 +5,7 @@ from keras.datasets import fashion_mnist
 import numpy as np
 from keras.utils import to_categorical
 import matplotlib.pyplot as plt
-get_ipython().magic('matplotlib inline')
+
 
 print('Training data shape : ', train_X.shape, train_Y.shape)
 print('Testing data shape : ', test_X.shape, test_Y.shape)
